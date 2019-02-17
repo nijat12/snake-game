@@ -2,6 +2,7 @@ import { movementEnum } from './global.js';
 
 export const state = {
   // Canvas Grid count including borders
+  isMobile: false,
   gridX: 40,
   gridY: 20,
   snake: [{
