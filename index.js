@@ -246,7 +246,6 @@ function getNewApple() {
   // If lands on the snake then re-draw
   state.snake.forEach(part => {
     if (part.x === state.apple.x && part.y === state.apple.y) {
-      shouldUpdateState = false;
       getNewApple();
     }
   });
