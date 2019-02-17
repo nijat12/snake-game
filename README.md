@@ -9,4 +9,4 @@ No Build necessary
 Place the files in a HTTP server
 
 ## Demo
-[Link](https://nijat12.github.io/snake-game/)
+Demo [Link](https://nijat12.github.io/snake-game/)
