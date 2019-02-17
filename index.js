@@ -260,27 +260,42 @@ function gameOver() {
   alert('Game Over! Please refresh the page to restart');
 };
 
-function mobileAndTabletcheck() {
-  (function(a) {
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      state.isMobile = true;
-    }
-  })(navigator.userAgent || navigator.vendor || window.opera);
-};
+function browserCheck() {
+  const isChromium = window.chrome;
+  const winNav = window.navigator;
+  const vendorName = winNav.vendor;
+  const isOpera = typeof window.opr !== "undefined";
+  const isIEedge = winNav.userAgent.indexOf("Edge") > -1;
 
-function mobileBrowserWarning() {
-  global.canvas.width = window.innerWidth;
-  global.canvas.height = window.innerHeight;
-  global.context.font = "70px Georgia";
-  global.context.fillText("Mobile not supported yet", 20, 500);
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    global.canvas.width = window.innerWidth;
+    global.canvas.height = window.innerHeight;
+    global.context.font = "70px Georgia";
+    global.context.fillText("Mobile not supported yet", 20, 500);
+
+    return false;
+  }
+
+  if (
+    isChromium !== null &&
+    typeof isChromium !== "undefined" &&
+    vendorName === "Google Inc." &&
+    isOpera === false &&
+    isIEedge === false
+  ) {
+    return true;
+  } else {
+    global.canvas.width = window.innerWidth;
+    global.canvas.height = window.innerHeight;
+    global.context.font = "70px Georgia";
+    global.context.fillText("Only Chrome is supported at this time", 20, 500);
+
+    return false;
+  }
 };
 
 function init() {
-  mobileAndTabletcheck();
-
-  if (state.isMobile) {
-    mobileBrowserWarning();
-  } else {
+  if (browserCheck()) {
     initialGridCalculation();
     resizeCanvas();
     itteration();
